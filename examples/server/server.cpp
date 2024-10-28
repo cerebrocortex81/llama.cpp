@@ -219,14 +219,15 @@ struct server_slot {
         if (params.n_predict == -1 && global_params.n_predict == -1) {
             return true; // limitless
         }
+        else if (global_params.n_predict == -2) {
+            return true; // generate until context is filled
+        }
 
         n_remaining = -1;
 
         if (params.n_predict != -1) {
             n_remaining = params.n_predict - n_decoded;
-        } else if (global_params.n_predict == -2) {
-            n_remaining = n_ctx - n_past;
-        } else if (global_params.n_predict != -1) {
+        }else if (global_params.n_predict != -1) {
             n_remaining = global_params.n_predict - n_decoded;
         }
 
@@ -1811,6 +1812,12 @@ struct server_context {
                     // we should never get here, because generation should already stopped in process_token()
                     slot.release();
                     send_error(slot, "context shift is disabled", ERROR_TYPE_SERVER);
+                    continue;
+                }
+
+                if (params.n_predict == -2) {
+                    slot.release();
+                    send_final_response(slot);
                     continue;
                 }
 
