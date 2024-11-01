@@ -17,7 +17,7 @@ Feature: llama.cpp server
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     """
     And   a completion request with no api error
-    Then  12 tokens are predicted 
+    Then  12 tokens are predicted
   Scenario: Generate tokens until context is full
     And   -2 server max tokens to predict
     Then  the server is starting
@@ -27,5 +27,5 @@ Feature: llama.cpp server
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     """
     And   a completion request with no api error
-    Then  11 tokens are predicted 
+    Then  11 tokens are predicted
 
