@@ -8,7 +8,6 @@ Feature: llama.cpp server
     And   a model alias tinyllama-2
     And   42 as server seed
     And   64 KV cache size
-    
   Scenario: Generate N tokens
     And   12 max tokens to predict
     Then  the server is starting
@@ -19,7 +18,6 @@ Feature: llama.cpp server
     """
     And   a completion request with no api error
     Then  12 tokens are predicted 
-
   Scenario: Generate tokens until context is full
     And   -2 server max tokens to predict
     Then  the server is starting
