@@ -219,7 +219,7 @@ def step_start_server(context):
             if attempts > max_attempts:
                 assert False, "server not started"
             print(f"waiting for server to start, connect error code = {result}...")
-            time.sleep(0.1)
+            time.sleep(0.3)
 
 
 async def wait_for_server_status_with_timeout(context, expecting_status: Literal['healthy', 'ready', 'idle', 'busy'] | str, timeout: int):
@@ -1343,7 +1343,7 @@ async def wait_for_slots_status(context,
     if 'GITHUB_ACTIONS' in os.environ:
         timeout *= 2
 
-    async with aiohttp.ClientSession(timeout=DEFAULT_TIMEOUT_SECONDS) as session:
+    async with aiohttp.ClientSession(timeout=DEFAULT_TIMEOUT_SECONDS, trust_env=True) as session:
         while True:
             headers = {'Authorization': f'Bearer {context.server_api_key}'}
             async with await session.get(f'{base_url}/slots', params=params, headers=headers) as slots_response:
