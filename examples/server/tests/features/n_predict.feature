@@ -30,3 +30,4 @@ Feature: llama.cpp server
     """
     And   a completion request with no api error
     Then  11 tokens are predicted 
+
