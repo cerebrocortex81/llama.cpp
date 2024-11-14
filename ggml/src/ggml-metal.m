@@ -1973,7 +1973,7 @@ static void ggml_metal_encode_node(
                             [encoder setBytes:&ne1     length:sizeof(ne1)  atIndex:14];
                             [encoder setBytes:&r2      length:sizeof(r2)   atIndex:15];
                             [encoder setBytes:&r3      length:sizeof(r3)   atIndex:16];
-                            [encoder setThreadgroupMemoryLength:8192 atIndex:0];
+                            [encoder setThreadgroupMemoryLength:(4096 + 2048) atIndex:0];
                             [encoder dispatchThreadgroups:MTLSizeMake( (ne11 + 31)/32, (ne01 + 63)/64, ne12*ne13) threadsPerThreadgroup:MTLSizeMake(128, 1, 1)];
                         } else {
                             int nth0 = 32;
