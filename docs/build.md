@@ -49,17 +49,17 @@ In order to build llama.cpp you have four different options.
 
       1. Single-config generators (e.g. default = `Unix Makefiles`; note that they just ignore the `--config` flag):
 
-      ```bash
-      cmake -B build -DCMAKE_BUILD_TYPE=Debug
-      cmake --build build
-      ```
+         ```bash
+         cmake -B build -DCMAKE_BUILD_TYPE=Debug
+         cmake --build build
+         ```
 
       2. Multi-config generators (`-G` param set to Visual Studio, XCode...):
 
-      ```bash
-      cmake -B build -G "Xcode"
-      cmake --build build --config Debug
-      ```
+         ```bash
+         cmake -B build -G "Xcode"
+         cmake --build build --config Debug
+         ```
     - Building for Windows (x86, x64 and arm64) with MSVC or clang as compilers:
       - Install Visual Studio 2022, e.g. via the [Community Edition](https://visualstudio.microsoft.com/de/vs/community/). In the installer, select at least the following options (this also automatically installs the required additional tools like CMake,...):
         - Tab Workload: Desktop-development with C++
