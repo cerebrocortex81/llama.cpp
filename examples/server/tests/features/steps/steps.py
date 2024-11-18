@@ -159,7 +159,7 @@ def step_n_slots(context, n_slots: int):
 
 @step('{n_predict:d} server max tokens to predict')
 def step_server_n_predict(context, n_predict: int):
-    context.n_server_predict = n_predict if n_predict > 0 else None
+    context.n_server_predict = n_predict if n_predict > 0 or n_predict in (-1, -2) else None
 
 
 @step('{slot_save_path} as slot save path')

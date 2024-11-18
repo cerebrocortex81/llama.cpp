@@ -216,6 +216,9 @@ struct server_slot {
         if (params.n_predict == -1 && global_params.n_predict == -1) {
             return true; // limitless
         }
+        else if (global_params.n_predict == -2) {
+            return true; // generate until context is filled
+        }
 
         n_remaining = -1;
 
@@ -1803,6 +1806,12 @@ struct server_context {
                     // we should never get here, because generation should already stopped in process_token()
                     slot.release();
                     send_error(slot, "context shift is disabled", ERROR_TYPE_SERVER);
+                    continue;
+                }
+
+                if (params.n_predict == -2) {
+                    slot.release();
+                    send_final_response(slot);
                     continue;
                 }
 
